@@ -821,7 +821,8 @@ bool RosegardenDocument::xmlParse( std::string  fileContents,
   cancelled = false;
 
   unsigned int elementCount = 0;
-  for( int i = 0; i < fileContents.length() - 1; ++i ) {
+  for( unsigned long i = 0; i < fileContents.length() - 1;
+       ++i ) {
     if( fileContents[i] == '<' && fileContents[i + 1] != '/' ) {
       ++elementCount;
     }
