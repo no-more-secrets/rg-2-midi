@@ -1,0 +1,94 @@
+/* -*- c-basic-offset: 4 indent-tabs-mode: nil -*- vi:set ts=8
+ * sts=4 sw=4: */
+
+/*
+  Rosegarden
+  A sequencer and musical notation editor.
+  Copyright 2000-2018 the Rosegarden development team.
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License as
+  published by the Free Software Foundation; either version 2 of
+  the License, or (at your option) any later version.  See the
+  file COPYING included with this distribution for more
+  information.
+*/
+
+#include "MappedDevice.h"
+#include "MappedInstrument.h"
+
+namespace Rosegarden {
+
+MappedDevice::MappedDevice()
+  : std::vector<MappedInstrument *>(),
+    m_id( Device::NO_DEVICE ),
+    m_type( Device::Midi ),
+    m_name( "Unconfigured device" ),
+    m_connection( "" ),
+    m_direction( MidiDevice::Play ),
+    m_recording( false ) {}
+
+MappedDevice::MappedDevice( DeviceId id, Device::DeviceType type,
+                            std::string name,
+                            std::string connection )
+  : std::vector<MappedInstrument *>(),
+    m_id( id ),
+    m_type( type ),
+    m_name( name ),
+    m_connection( connection ),
+    m_direction( MidiDevice::Play ),
+    m_recording( false ) {}
+
+MappedDevice::~MappedDevice() {}
+
+MappedDevice::MappedDevice( const MappedDevice &mD )
+  : std::vector<MappedInstrument *>() {
+  clear();
+
+  for( MappedDeviceConstIterator it = mD.begin(); it != mD.end();
+       ++it )
+    this->push_back( new MappedInstrument( **it ) );
+
+  m_id         = mD.getId();
+  m_type       = mD.getType();
+  m_name       = mD.getName();
+  m_connection = mD.getConnection();
+  m_direction  = mD.getDirection();
+}
+
+void MappedDevice::clear() {
+  MappedDeviceIterator it;
+
+  for( it = this->begin(); it != this->end(); ++it )
+    delete( *it );
+
+  this->erase( this->begin(), this->end() );
+}
+
+MappedDevice &MappedDevice::operator+( const MappedDevice &mD ) {
+  for( MappedDeviceConstIterator it = mD.begin(); it != mD.end();
+       ++it )
+    this->push_back( new MappedInstrument( **it ) );
+
+  return *this;
+}
+
+MappedDevice &MappedDevice::operator=( const MappedDevice &mD ) {
+  if( &mD == this ) return *this;
+
+  clear();
+
+  for( MappedDeviceConstIterator it = mD.begin(); it != mD.end();
+       ++it )
+    this->push_back( new MappedInstrument( **it ) );
+
+  m_id         = mD.getId();
+  m_type       = mD.getType();
+  m_name       = mD.getName();
+  m_connection = mD.getConnection();
+  m_direction  = mD.getDirection();
+
+  return *this;
+}
+
+} // namespace Rosegarden

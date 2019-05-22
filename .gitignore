@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Developer's local files
+/Makefile
+/.vimrc
+/.clang-format
+/scripts
+/.builds
+/*.xml
+/*.mid
+*.swp
