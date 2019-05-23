@@ -20,19 +20,19 @@
 
 #include "Midi.h"
 #include "MidiEvent.h"
-//#include "Segment.h"
-//#include "NotationTypes.h"
-//#include "BaseProperties.h"
-//#include "Instrument.h"
-//#include "MidiTypes.h"
-//#include "Profiler.h"
-//#include "Studio.h"
-//#include "Track.h"
+
+
+
+
+
+
+
+
 #include "RosegardenDocument.h"
 #include "SequenceManager.h"
-//#include "gui/seqmanager/SequenceManager.h"
-//#include "misc/Debug.h"
-//#include "misc/Strings.h"
+
+
+
 #include "MappedBufMetaIterator.h"
 #include "MidiInserter.h"
 #include "SortingInserter.h"

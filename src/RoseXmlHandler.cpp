@@ -47,22 +47,22 @@
 #include "TriggerSegment.h"
 #include "XmlStorableEvent.h"
 #include "XmlSubHandler.h"
-//#include "gui/application/RosegardenMainWindow.h"
-//#include "gui/dialogs/FileLocateDialog.h"
-//#include "gui/studio/AudioPlugin.h"
-//#include "gui/studio/AudioPluginManager.h"
-//#include "gui/widgets/StartupLogo.h"
-//#include "misc/Debug.h"
-//#include "misc/Strings.h"
-//#include "AudioFileManager.h"
+
+
+
+
+
+
+
+
 #include "Midi.h"
 #include "RosegardenSequencer.h"
 
 #include <QtCore/QByteArray>
 #include <QtCore/QDataStream>
-//#include <QDialog>
+
 #include <QtCore/QFileInfo>
-//#include <QMessageBox>
+
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 

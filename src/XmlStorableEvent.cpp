@@ -24,7 +24,7 @@
 
 #include "Event.h"
 #include "NotationTypes.h"
-//#include "base/BaseProperties.h"
+
 #include "NotationStrings.h"
 
 #include <QString>

@@ -22,12 +22,12 @@
 
 #include "RosegardenSequencer.h"
 
-//#include <sys/types.h>
-//#include <sys/stat.h>
-//#include <fcntl.h>
-//#include <sys/mman.h>
-//#include <unistd.h>
-//#include <errno.h>
+
+
+
+
+
+
 
 #include "ControlBlock.h"
 #include "Instrument.h"
@@ -35,16 +35,16 @@
 #include "MappedEventInserter.h"
 #include "MappedInstrument.h"
 #include "SequencerDataBlock.h"
-//#include "PluginFactory.h"
+
 #include "Profiler.h"
-//#include "SoundDriver.h"
-//#include "SoundDriverFactory.h"
+
+
 #include "StudioControl.h"
 
-//#include "gui/application/RosegardenApplication.h"
-//#include "gui/application/RosegardenMainWindow.h"
 
-//#include "rosegarden-version.h"
+
+
+
 
 // #define DEBUG_ROSEGARDEN_SEQUENCER
 

@@ -19,7 +19,7 @@
 */
 
 #include "DocumentGet.h"
-//#include "gui/application/RosegardenMainWindow.h"
+
 #include <iostream>
 #include "RosegardenDocument.h"
 

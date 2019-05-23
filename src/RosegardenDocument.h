@@ -25,8 +25,8 @@
 #include "RealTime.h"
 #include "Segment.h"
 #include "Studio.h"
-//#include "gui/editors/segment/compositionview/AudioPeaksThread.h"
-//#include "sound/AudioFileManager.h"
+
+
 #include "Event.h"
 
 #include <map>

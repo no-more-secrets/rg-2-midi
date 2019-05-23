@@ -24,7 +24,7 @@
 #include "NotationTypes.h"
 #include "Profiler.h"
 #include "SegmentLinker.h"
-//#include "gui/general/GUIPalette.h"
+
 
 #include <algorithm>
 #include <cstdio>

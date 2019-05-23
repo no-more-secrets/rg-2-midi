@@ -20,7 +20,7 @@
 #ifndef RG_COLOUR_H
 #define RG_COLOUR_H
 
-//#include <QColor>
+
 #include <string>
 
 namespace Rosegarden 

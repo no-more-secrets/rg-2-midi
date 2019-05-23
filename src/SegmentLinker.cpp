@@ -19,8 +19,8 @@
 
 #include "Event.h"
 #include "Segment.h"
-//#include "CommandHistory.h"
-//#include "Command.h"
+
+
 #include "BaseProperties.h"
 #include "SegmentNotationHelper.h"
 

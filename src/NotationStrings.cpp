@@ -19,13 +19,13 @@
 */
 
 #include "NotationStrings.h"
-//#include <QApplication>
 
-//#include "Strings.h"
+
+
 #include "ConfigGroups.h"
 #include "Exception.h"
 #include "NotationTypes.h"
-//#include "gui/configuration/GeneralConfigurationPage.h"
+
 #include <QSettings>
 #include <QString>
 

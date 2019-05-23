@@ -19,7 +19,7 @@
 #include <sstream>
 
 #include "ControlParameter.h"
-//#include "ControllerEventAdapter.h"
+
 #include "MidiTypes.h"
 
 namespace Rosegarden {

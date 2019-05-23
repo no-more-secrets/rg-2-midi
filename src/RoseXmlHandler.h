@@ -26,7 +26,7 @@
 #include <QtXml/QXmlDefaultHandler>
 #include <QtCore/QSharedPointer>
 #include <QtCore/QPointer>
-//#include <qt5/QProgressDialog>
+
 
 #include <map>
 #include <set>

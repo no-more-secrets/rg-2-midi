@@ -29,8 +29,8 @@
 
 #include "ControlBlock.h"
 #include "Midi.h" // for MIDI_SYSTEM_RESET
-//#include "misc/Strings.h"  // for qStrToBool()
-//#include "ConfigGroups.h"
+
+
 #include "Composition.h"
 #include "CompositionMapper.h"
 #include "Device.h"
@@ -43,24 +43,24 @@
 #include "Studio.h"
 #include "Track.h"
 #include "TriggerSegment.h"
-//#include "document/CommandHistory.h"
-//#include "gui/dialogs/AudioManagerDialog.h"
-//#include "gui/dialogs/CountdownDialog.h"
-//#include "gui/application/RosegardenMainWindow.h"
-//#include "gui/widgets/StartupLogo.h"
+
+
+
+
+
 #include "StudioControl.h"
-//#include "gui/widgets/WarningWidget.h"
+
 #include "MarkerMapper.h"
 #include "RosegardenSequencer.h"
-//#include "MetronomeMapper.h"
+
 #include "TempoSegmentMapper.h"
 #include "TimeSigSegmentMapper.h"
-//#include "sound/AudioFile.h"  // For AudioFileId
+
 #include "MappedEvent.h"
 #include "MappedEventList.h"
-//#include "MappedInstrument.h"
 
-//#include "rosegarden-version.h"  // for VERSION
+
+
 
 #include <algorithm>
 #include <utility> // For std::pair.

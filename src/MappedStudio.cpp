@@ -18,10 +18,10 @@
 #define RG_MODULE_STRING "[MappedStudio]"
 
 #include "MappedStudio.h"
-//#include "SoundDriver.h"
-//#include "PluginFactory.h"
-//#include "misc/Strings.h"
-//#include "misc/Debug.h"
+
+
+
+
 
 #include <pthread.h> // for mutex
 
