@@ -58,13 +58,13 @@
 #include "Midi.h"
 #include "RosegardenSequencer.h"
 
-#include <qt5/QtCore/QByteArray>
-#include <qt5/QtCore/QDataStream>
+#include <QtCore/QByteArray>
+#include <QtCore/QDataStream>
 //#include <QDialog>
-#include <qt5/QtCore/QFileInfo>
+#include <QtCore/QFileInfo>
 //#include <QMessageBox>
-#include <qt5/QtCore/QString>
-#include <qt5/QtCore/QStringList>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
 
 namespace Rosegarden {
 

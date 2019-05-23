@@ -22,10 +22,10 @@
 #include "MidiProgram.h"
 #include "Event.h"
 
-#include <qt5/QtCore/QString>
-#include <qt5/QtXml/QXmlDefaultHandler>
-#include <qt5/QtCore/QSharedPointer>
-#include <qt5/QtCore/QPointer>
+#include <QtCore/QString>
+#include <QtXml/QXmlDefaultHandler>
+#include <QtCore/QSharedPointer>
+#include <QtCore/QPointer>
 //#include <qt5/QProgressDialog>
 
 #include <map>
