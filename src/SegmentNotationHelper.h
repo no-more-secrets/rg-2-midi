@@ -542,9 +542,6 @@ public:
 
     
 protected:
-    const Quantizer &basicQuantizer();
-    const Quantizer &notationQuantizer();
-
     /**
      * Collapse multiple consecutive rests into one, in preparation
      * for insertion of a note (whose duration may exceed that of the

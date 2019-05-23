@@ -21,11 +21,8 @@
 
 #include "SegmentNotationHelper.h"
 #include "BaseProperties.h"
-#include "BasicQuantizer.h"
 #include "Composition.h"
-#include "NotationQuantizer.h"
 #include "NotationTypes.h"
-#include "Quantizer.h"
 
 #include <algorithm>
 #include <iostream>
@@ -41,14 +38,6 @@ using std::string;
 using namespace BaseProperties;
 
 SegmentNotationHelper::~SegmentNotationHelper() {}
-
-const Quantizer &SegmentNotationHelper::basicQuantizer() {
-  return *( segment().getComposition()->getBasicQuantizer() );
-}
-
-const Quantizer &SegmentNotationHelper::notationQuantizer() {
-  return *( segment().getComposition()->getNotationQuantizer() );
-}
 
 //!!! we need to go very carefully through this file and check
 //! calls
@@ -595,19 +584,6 @@ Segment::iterator SegmentNotationHelper::splitIntoTie(
 bool SegmentNotationHelper::isViable( timeT duration,
                                       int   dots ) {
   bool viable;
-
-  /*!!!
-      duration = basicQuantizer().quantizeDuration(duration);
-
-      if (dots >= 0) {
-          viable = (duration ==
-     Quantizer(Quantizer::RawEventData, Quantizer::DefaultTarget,
-                                          Quantizer::NoteQuantize,
-     1, dots). quantizeDuration(duration)); } else { viable =
-     (duration ==
-     notationQuantizer().quantizeDuration(duration));
-      }
-  */
 
   //!!! what to do about this?
 

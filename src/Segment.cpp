@@ -19,7 +19,6 @@
 
 #include "Segment.h"
 #include "BaseProperties.h"
-#include "BasicQuantizer.h"
 #include "Composition.h"
 #include "DocumentGet.h"
 #include "NotationTypes.h"
@@ -58,8 +57,6 @@ Segment::Segment( SegmentType segmentType, timeT startTime )
     m_audioStartTime( 0, 0 ),
     m_audioEndTime( 0, 0 ),
     m_repeating( false ),
-    m_quantizer( new BasicQuantizer() ),
-    m_quantize( false ),
     m_transpose( 0 ),
     m_delay( 0 ),
     m_realTimeDelay( 0, 0 ),
@@ -102,10 +99,6 @@ Segment::Segment( const Segment &segment )
     m_audioStartTime( segment.getAudioStartTime() ),
     m_audioEndTime( segment.getAudioEndTime() ),
     m_repeating( segment.isRepeating() ),
-    m_quantizer( new BasicQuantizer(
-        segment.m_quantizer->getUnit(),
-        segment.m_quantizer->getDoDurations() ) ),
-    m_quantize( segment.hasQuantization() ),
     m_transpose( segment.getTranspose() ),
     m_delay( segment.getDelay() ),
     m_realTimeDelay( segment.getRealTimeDelay() ),
@@ -1045,30 +1038,6 @@ void Segment::getTimeSlice( timeT           absoluteTime,
          ( *end )->getAbsoluteTime() ==
              ( *start )->getAbsoluteTime() )
     ++end;
-}
-
-void Segment::setQuantization( bool quantize ) {
-  if( m_quantize != quantize ) {
-    m_quantize = quantize;
-    if( m_quantize ) {
-      m_quantizer->quantize( this, begin(), end() );
-    } else {
-      m_quantizer->unquantize( this, begin(), end() );
-    }
-  }
-}
-
-bool Segment::hasQuantization() const { return m_quantize; }
-
-void Segment::setQuantizeLevel( timeT unit ) {
-  if( m_quantizer->getUnit() == unit ) return;
-
-  m_quantizer->setUnit( unit );
-  if( m_quantize ) m_quantizer->quantize( this, begin(), end() );
-}
-
-const BasicQuantizer *Segment::getQuantizer() const {
-  return m_quantizer;
 }
 
 void Segment::setRepeating( bool value ) {

@@ -25,12 +25,9 @@
 #include "BaseProperties.h"
 #include "NotationTypes.h"
 #include "MidiTypes.h"
-#include "Quantizer.h"
 
 namespace Rosegarden
 {
-
-class Quantizer;
 
 /**
  * A "set" in Rosegarden terminology is a collection of elements found
@@ -105,7 +102,7 @@ public:
     static Event *getAsEvent(const Iterator &i);
 
 protected:
-    AbstractSet(Container &c, Iterator elementInSet, const Quantizer *);
+    AbstractSet(Container &c, Iterator elementInSet);
     void initialise();
 
     // Finish initialization specifically for a derived class
@@ -118,7 +115,6 @@ protected:
     virtual bool sample(const Iterator &i, bool goingForwards);
 
     Container &getContainer() const { return m_container; }
-    const Quantizer &getQuantizer() const { return *m_quantizer; }
 
     // Data members:
 
@@ -126,7 +122,6 @@ protected:
     Iterator m_initial, m_final, m_initialNote, m_finalNote;
     Iterator m_shortest, m_longest, m_highest, m_lowest;
     Iterator m_baseIterator;
-    const Quantizer *m_quantizer;
 };
 
 
@@ -166,7 +161,6 @@ public:
        in to the chord for you */
     GenericChord(Container &c,
                  Iterator elementInChord,
-                 const Quantizer *quantizer,
                  PropertyName stemUpProperty = PropertyName::EmptyPropertyName);
 
     ~GenericChord() override;
@@ -234,11 +228,10 @@ class Chord : public GenericChord<Event, Segment, true>
  public:
     Chord(Container &c,
           Iterator elementInChord,
-          const Quantizer *quantizer,
           PropertyName stemUpProperty =
           PropertyName::EmptyPropertyName)
         : GenericChord<Element, Container, singleStaff>
-              (c, elementInChord, quantizer, stemUpProperty)
+              (c, elementInChord, stemUpProperty)
         { initialise(); }
 };
 
@@ -251,11 +244,10 @@ class GlobalChord : public GenericChord<Event, CompositionTimeSliceAdapter, fals
  public:
     GlobalChord(Container &c,
           Iterator elementInChord,
-          const Quantizer *quantizer,
           PropertyName stemUpProperty =
           PropertyName::EmptyPropertyName)
         : GenericChord<Element, Container, singleStaff>
-              (c, elementInChord, quantizer, stemUpProperty)
+              (c, elementInChord, stemUpProperty)
         { initialise(); }
 };
 
@@ -296,7 +288,7 @@ setMaybe__String(Event *e, const PropertyName &name, const std::string &value);
 
 template <class Element, class Container>
 AbstractSet<Element, Container>::AbstractSet(Container &c,
-                                             Iterator i, const Quantizer *q):
+                                             Iterator i):
     m_container(c),
     m_initial(c.end()),
     m_final(c.end()),
@@ -306,8 +298,7 @@ AbstractSet<Element, Container>::AbstractSet(Container &c,
     m_longest(c.end()),
     m_highest(c.end()),
     m_lowest(c.end()),
-    m_baseIterator(i),
-    m_quantizer(q)
+    m_baseIterator(i)
 {
     // ...
 }
@@ -369,38 +360,7 @@ template <class Element, class Container>
 bool
 AbstractSet<Element, Container>::sample(const Iterator &i, bool)
 {
-    const Quantizer &q(getQuantizer());
-    Event *e = AbstractSet::getAsEvent(i);
-    timeT d(q.getQuantizedDuration(e));
-    
-    if (e->isa(Note::EventType) || d > 0) {
-        if (m_longest == getContainer().end() ||
-            d > q.getQuantizedDuration(AbstractSet::getAsEvent(m_longest))) {
-//          std::cerr << "New longest in set at duration " << d << " and time " << e->getAbsoluteTime() << std::endl;
-            m_longest = i;
-        }
-        if (m_shortest == getContainer().end() ||
-            d < q.getQuantizedDuration(AbstractSet::getAsEvent(m_shortest))) {
-//          std::cerr << "New shortest in set at duration " << d << " and time " << e->getAbsoluteTime() << std::endl;
-            m_shortest = i;
-        }
-    }
-
-    if (e->isa(Note::EventType)) {
-        long p = get__Int(e, BaseProperties::PITCH);
-
-        if (m_highest == getContainer().end() ||
-            p > get__Int(AbstractSet::getAsEvent(m_highest), BaseProperties::PITCH)) {
-//          std::cerr << "New highest in set at pitch " << p << " and time " << e->getAbsoluteTime() << std::endl;
-            m_highest = i;
-        }
-        if (m_lowest == getContainer().end() ||
-            p < get__Int(AbstractSet::getAsEvent(m_lowest), BaseProperties::PITCH)) {
-//          std::cerr << "New lowest in set at pitch " << p << " and time " << e->getAbsoluteTime() << std::endl;
-            m_lowest = i;
-        }
-    }
-
+    std::cerr << "should not be here: " << __FILE__ << ":" << __LINE__ << "\n";
     return true;
 }
 
@@ -410,11 +370,10 @@ AbstractSet<Element, Container>::sample(const Iterator &i, bool)
 template <class Element, class Container, bool singleStaff>
 GenericChord<Element, Container, singleStaff>::GenericChord(Container &c,
                                                             Iterator i,
-                                                            const Quantizer *q,
                                                             PropertyName stemUpProperty) :
     AbstractSet<Element, Container>(c, i, q),
     m_stemUpProperty(stemUpProperty),
-    m_time(q->getQuantizedAbsoluteTime(GenericChord::getAsEvent(i))),
+    m_time(),
     m_subordering(GenericChord::getAsEvent(i)->getSubOrdering()),
     m_firstReject(c.end())
 {
@@ -444,35 +403,7 @@ template <class Element, class Container, bool singleStaff>
 bool
 GenericChord<Element, Container, singleStaff>::test(const Iterator &i)
 {
-    Event *e = GenericChord::getAsEvent(i);
-    if (AbstractSet<Element, Container>::
-	getQuantizer().getQuantizedAbsoluteTime(e) != m_time) {
-	return false;
-    }
-    if (e->getSubOrdering() != m_subordering) {
-	return false;
-    }
-
-    // We permit note or rest events etc here, because if a chord is a
-    // little staggered (for performance reasons) then it's not at all
-    // unlikely we could get other events (even rests) in the middle
-    // of it.  So long as sample() only permits notes, we should be
-    // okay with this.
-    //
-    // (We're really only refusing things like clef and key events
-    // here, though it's slightly quicker [since most things are
-    // notes] and perhaps a bit safer to do it by testing for
-    // inclusion rather than exclusion.)
-
-    std::string type(e->getType());
-    return (type == Note::EventType ||
-            type == Note::EventRestType ||
-            type == Text::EventType ||
-            type == Indication::EventType ||
-            type == PitchBend::EventType ||
-            type == Controller::EventType ||
-            type == KeyPressure::EventType ||
-            type == ChannelPressure::EventType);
+    return false;
 }
 
 template <class Element, class Container, bool singleStaff>

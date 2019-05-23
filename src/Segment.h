@@ -45,8 +45,6 @@ protected:
 };
 
 class SegmentObserver;
-class Quantizer;
-class BasicQuantizer;
 class Composition;
 class SegmentLinker;
 class BasicCommand;
@@ -358,34 +356,10 @@ public:
      */
     const timeT *getRawEndMarkerTime() const;
 
-    //////
-    //
-    // QUANTIZATION
-
-    /**
-     * Switch quantization on or off.
-     */
-    void setQuantization(bool quantize);
-
     /**
      * Find out whether quantization is on or off.
      */
     bool hasQuantization() const;
-
-    /**
-     * Set the quantization level.
-     * (This does not switch quantization on, if it's currently off,
-     * it only changes the level that will be used when it's next
-     * switched on.)
-     */
-    void setQuantizeLevel(timeT unit);
-
-    /**
-     * Get the quantizer currently in (or not in) use.
-     */
-    const BasicQuantizer *getQuantizer() const;
-
-
 
     //////
     //
@@ -913,9 +887,6 @@ private:
     RealTime m_audioEndTime;     // end time relative to start of audio file
 
     bool m_repeating;           // is this segment repeating?
-
-    BasicQuantizer *const m_quantizer;
-    bool m_quantize;
 
     int m_transpose;            // all Events tranpose
     timeT m_delay;              // all Events delay

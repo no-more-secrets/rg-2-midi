@@ -21,9 +21,7 @@
 
 #include "AudioLevel.h"
 #include "BaseProperties.h"
-#include "BasicQuantizer.h"
 #include "FastVector.h"
-#include "NotationQuantizer.h"
 #include "Profiler.h"
 #include "Segment.h"
 #include "SegmentLinker.h"
@@ -172,8 +170,6 @@ Composition::Composition()
     m_tempoSegment( TempoEventType ),
     m_barPositionsNeedCalculating( true ),
     m_tempoTimestampsNeedCalculating( true ),
-    m_basicQuantizer( new BasicQuantizer() ),
-    m_notationQuantizer( new NotationQuantizer() ),
     m_position( 0 ),
     m_defaultTempo( getTempoForQpm( 120.0 ) ),
     m_minTempo( 0 ),
@@ -205,8 +201,6 @@ Composition::~Composition() {
 
   notifySourceDeletion();
   clear();
-  delete m_basicQuantizer;
-  delete m_notationQuantizer;
 }
 
 Composition::iterator Composition::addSegment(

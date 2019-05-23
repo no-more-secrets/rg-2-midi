@@ -43,10 +43,6 @@ namespace Rosegarden
 // (though see usage of target tempo in e.g. addTempoAtTime).
 typedef int tempoT;
 
-class Quantizer;
-class BasicQuantizer;
-class NotationQuantizer;
-
 class CompositionObserver;
 
 /// Composition contains a complete representation of a piece of music.
@@ -826,28 +822,6 @@ public:
 
     //////
     //
-    // QUANTIZERS
-
-    /**
-     * Return a quantizer that quantizes to the our most basic
-     * units (i.e. a unit quantizer whose unit is our shortest
-     * note duration).
-     */
-    const BasicQuantizer *getBasicQuantizer() const {
-        return m_basicQuantizer;
-    }
-
-    /**
-     * Return a quantizer that does quantization for notation
-     * only.
-     */
-    const NotationQuantizer *getNotationQuantizer() const {
-        return m_notationQuantizer;
-    }
-
-
-    //////
-    //
     // REFRESH STATUS
 
     // delegate RefreshStatusArray API
@@ -1060,9 +1034,6 @@ protected:
     void rebuildVoiceCaches() const;
 
     void updateExtremeTempos();
-
-    BasicQuantizer                   *m_basicQuantizer;
-    NotationQuantizer                *m_notationQuantizer;
 
     timeT                             m_position;
     tempoT                            m_defaultTempo;
