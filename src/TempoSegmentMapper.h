@@ -25,7 +25,7 @@ namespace Rosegarden
 {
 
 class RosegardenDocument;
-class RealTime;
+struct RealTime;
 
 class TempoSegmentMapper : public SpecialSegmentMapper
 {

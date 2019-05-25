@@ -15,8 +15,10 @@ target_compile_options(
   $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
     -Wall
     -Wextra
+    -Wno-unknown-warning-option
     -Wno-unused-parameter
     -Wno-unused-variable
+    -Wno-unused-private-field
     -Wno-unused-but-set-variable
     -Wno-unused-but-set-parameter
     -Wno-delete-non-virtual-dtor

@@ -30,7 +30,7 @@ namespace Rosegarden
 
 class TriggerSegmentRec;
 class Composition;
-class RealTime;
+struct RealTime;
  
 /// Converts (maps) Event objects into MappedEvent objects for a Segment
 /**
@@ -67,7 +67,7 @@ private:
     InternalSegmentMapper operator=(const InternalSegmentMapper &);
 
     friend class ControllerSearch;
-    friend class ControllerContextMap;
+    friend struct ControllerContextMap;
 
     /// Get CCs and PitchBend at a time for this Segment.
     /**

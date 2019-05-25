@@ -22,13 +22,6 @@
 
 #include "RosegardenSequencer.h"
 
-
-
-
-
-
-
-
 #include "ControlBlock.h"
 #include "Instrument.h"
 #include "InstrumentStaticSignals.h"
@@ -38,13 +31,7 @@
 
 #include "Profiler.h"
 
-
 #include "StudioControl.h"
-
-
-
-
-
 
 // #define DEBUG_ROSEGARDEN_SEQUENCER
 
@@ -467,7 +454,7 @@ std::string RosegardenSequencer::setMappedPropertyList(
   if( object ) {
     try {
       object->setPropertyList( property, values );
-    } catch( std::string err ) { return err; }
+    } catch( std::string const &err ) { return err; }
     return "";
   }
 

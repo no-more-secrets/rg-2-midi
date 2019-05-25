@@ -24,7 +24,7 @@
 namespace Rosegarden
 {
   class ControllerContext;
-  class ControllerContextMap;
+  struct ControllerContextMap;
   class ControllerSearch;
   class ControlParameter;
   class Instrument;
