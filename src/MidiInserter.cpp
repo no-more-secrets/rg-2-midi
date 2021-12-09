@@ -382,19 +382,19 @@ void MidiInserter::insertCopy( const MappedEvent &evt ) {
       case MappedEvent::SystemAudioFileFormat:
       default: break;
     }
-  } catch( MIDIValueOutOfRange r ) {
+  } catch( MIDIValueOutOfRange const& r ) {
 #ifdef MIDI_DEBUG
 #endif
 
-  } catch( Event::NoData d ) {
+  } catch( Event::NoData const& d ) {
 #ifdef MIDI_DEBUG
 #endif
 
-  } catch( Event::BadType b ) {
+  } catch( Event::BadType const& b ) {
 #ifdef MIDI_DEBUG
 #endif
 
-  } catch( SystemExclusive::BadEncoding e ) {
+  } catch( SystemExclusive::BadEncoding const& e ) {
 #ifdef MIDI_DEBUG
 #endif
   }

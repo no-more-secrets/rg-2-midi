@@ -87,7 +87,7 @@ XmlStorableEvent::XmlStorableEvent(
         try {
           Note n( NotationStrings::getNoteForName( attrVal ) );
           setDuration( n.getDuration() );
-        } catch( NotationStrings::MalformedNoteName m ) {}
+        } catch( NotationStrings::MalformedNoteName const& m ) {}
       } else {
         setDuration( d );
       }

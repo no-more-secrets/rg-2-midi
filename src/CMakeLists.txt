@@ -12,7 +12,7 @@ add_executable( rg2midi ${sources} )
 target_compile_options(
   rg2midi PRIVATE
   # clang/GCC warnings
-  $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:
+  $<$<CXX_COMPILER_ID:Clang>:
     -Wall
     -Wextra
     -Wno-unknown-warning-option
@@ -23,6 +23,17 @@ target_compile_options(
     -Wno-unused-but-set-parameter
     -Wno-delete-non-virtual-dtor
     -Wno-reorder
+    -Wno-unused-function >
+  $<$<CXX_COMPILER_ID:GNU>:
+    -Wall
+    -Wextra
+    -Wno-unused-parameter
+    -Wno-unused-variable
+    -Wno-unused-but-set-variable
+    -Wno-unused-but-set-parameter
+    -Wno-delete-non-virtual-dtor
+    -Wno-reorder
+    -Wno-stringop-truncation
     -Wno-unused-function >
 )
 

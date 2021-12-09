@@ -115,26 +115,26 @@ MappedEvent::MappedEvent( InstrumentId id, const Event& e,
     } else {
       m_type = InvalidMappedEvent;
     }
-  } catch( MIDIValueOutOfRange r ) {
+  } catch( MIDIValueOutOfRange const& r ) {
 #ifdef DEBUG_MAPPEDEVENT
     RG_WARNING << "MIDI value out of range in MappedEvent ctor";
 #endif
 
-  } catch( Event::NoData d ) {
+  } catch( Event::NoData const& d ) {
 #ifdef DEBUG_MAPPEDEVENT
     RG_WARNING << "Caught Event::NoData in MappedEvent ctor, "
                   "message is:\n"
                << d.getMessage();
 #endif
 
-  } catch( Event::BadType b ) {
+  } catch( Event::BadType const& b ) {
 #ifdef DEBUG_MAPPEDEVENT
     RG_WARNING << "Caught Event::BadType in MappedEvent ctor, "
                   "message is:\n"
                << b.getMessage();
 #endif
 
-  } catch( SystemExclusive::BadEncoding e ) {
+  } catch( SystemExclusive::BadEncoding const& e ) {
 #ifdef DEBUG_MAPPEDEVENT
     RG_WARNING
         << "Caught bad SysEx encoding in MappedEvent ctor";

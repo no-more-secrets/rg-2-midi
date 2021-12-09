@@ -639,7 +639,7 @@ GenericChord<Element, Container, singleStaff>::PitchGreater::operator()(const It
         long ap = get__Int(GenericChord::getAsEvent(a), BaseProperties::PITCH);
         long bp = get__Int(GenericChord::getAsEvent(b), BaseProperties::PITCH);
         return (ap < bp);
-    } catch (Event::NoData) {
+    } catch (Event::NoData const&) {
         return false;
     }
 }

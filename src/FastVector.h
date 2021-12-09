@@ -160,12 +160,8 @@ public:
     iterator_base
     {
     public:
-        iterator() : iterator_base() { }
-        iterator(const iterator_base &i) : iterator_base(i) { }
-        iterator &operator=(const iterator &i) {
-            iterator_base::operator=(i);
-            return *this;
-        }
+        using iterator_base::iterator_base;
+        using iterator_base::operator=;
 
         T &operator*() { return iterator_base::m_v->at(iterator_base::m_i); }
         T *operator->() { return &(operator*()); }
@@ -182,12 +178,8 @@ public:
     iterator_base
     {
     public:
-        reverse_iterator() : iterator_base() { }
-        reverse_iterator(const iterator_base &i) : iterator_base(i) { }
-        reverse_iterator &operator=(const reverse_iterator &i) {
-            iterator_base::operator=(i);
-            return *this;
-        }
+        using iterator_base::iterator_base;
+        using iterator_base::operator=;
 
         T &operator*() { return iterator_base::m_v->at(iterator_base::m_v->size() - iterator_base::m_i - 1); }
         T *operator->() { return &(operator*()); }
@@ -204,12 +196,10 @@ public:
     iterator_base
     {
     public:
-        const_iterator() : iterator_base() { }
-        const_iterator(const iterator_base &i) : iterator_base(i) { }
-        const_iterator &operator=(const const_iterator &i) {
-            iterator_base::operator=(i);
-            return *this;
-        }
+        using iterator_base::iterator_base;
+        using iterator_base::operator=;
+
+        const_iterator(iterator const& i) : iterator_base(i) {}
 
         const T &operator*() const { return iterator_base::m_v->at(iterator_base::m_i); }
         const T *operator->() const { return &(operator*()); }
@@ -224,12 +214,10 @@ public:
     iterator_base
     {
     public:
-        const_reverse_iterator() : iterator_base() { }
-        const_reverse_iterator(const iterator_base &i) : iterator_base(i) { }
-        const_reverse_iterator &operator=(const const_reverse_iterator &i) {
-            iterator_base::operator=(i);
-            return *this;
-        }
+        using iterator_base::iterator_base;
+        using iterator_base::operator=;
+
+        const_reverse_iterator(reverse_iterator const& i) : iterator_base(i) {}
 
         const T &operator*() const { return iterator_base::m_v->at(iterator_base::m_v->size() - iterator_base::m_i - 1); }
         const T *operator->() const { return &(operator*()); }
