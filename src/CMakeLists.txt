@@ -23,6 +23,7 @@ target_compile_options(
     -Wno-unused-but-set-parameter
     -Wno-delete-non-virtual-dtor
     -Wno-reorder
+    -Wno-deprecated-declarations
     -Wno-unused-function >
   $<$<CXX_COMPILER_ID:GNU>:
     -Wall
@@ -33,6 +34,7 @@ target_compile_options(
     -Wno-unused-but-set-parameter
     -Wno-delete-non-virtual-dtor
     -Wno-reorder
+    -Wno-deprecated-declarations
     -Wno-stringop-truncation
     -Wno-unused-function >
 )
