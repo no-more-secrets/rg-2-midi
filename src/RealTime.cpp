@@ -111,7 +111,11 @@ RealTime::toString(bool align) const
 std::string
 RealTime::toText(bool fixedDp) const
 {
-    if (*this < RealTime::zeroTime) return "-" + (-*this).toText();
+    if (*this < RealTime::zeroTime) {
+        std::string res = "-";
+        res += (-*this).toText();
+        return res;
+    }
 
     std::stringstream out;
 
